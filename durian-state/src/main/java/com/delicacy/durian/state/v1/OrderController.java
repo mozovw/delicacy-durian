@@ -1,7 +1,9 @@
-package com.delicacy.durian.state;
+package com.delicacy.durian.state.v1;
 
-import com.delicacy.durian.state.dto.Order;
-import com.delicacy.durian.state.dto.OrderDto;
+
+import com.delicacy.durian.state.v1.dto.Order;
+import com.delicacy.durian.state.v1.dto.OrderDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +33,16 @@ public class OrderController {
         return null;
     }
 
+    @Autowired
+    private Context context;
+
+    /**
+     * curl -H "Content-Type:application/json" -X POST  -d '{"payChannelId":1,"goodsId":1}' http://localhost:8080/order/account2
+     * @param orderDto
+     * @return
+     */
     @PostMapping("account2")
     public BigDecimal calcAccount2(@RequestBody OrderDto orderDto){
-        Context context = new Context();
         Order order = new Order();
         order.setGoodsId(order.getGoodsId());
         order.setPayChannelId(orderDto.getPayChannelId());

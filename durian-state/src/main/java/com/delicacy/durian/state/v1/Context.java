@@ -1,7 +1,8 @@
-package com.delicacy.durian.state;
+package com.delicacy.durian.state.v1;
 
-import com.delicacy.durian.state.pay.Strategy;
-import com.delicacy.durian.state.pay.StrategyFactory;
+import com.delicacy.durian.state.v1.pay.Strategy;
+import com.delicacy.durian.state.v1.pay.StrategyFactory;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
  * @author zyt
  * @create 2018-05-26 18:00
  **/
+@Service
 public class Context {
 
     public BigDecimal calcDiscount(Integer chanelId, Integer goodsId) {

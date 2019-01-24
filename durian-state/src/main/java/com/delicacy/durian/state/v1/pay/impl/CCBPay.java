@@ -1,7 +1,7 @@
-package com.delicacy.durian.state.pay.impl;
+package com.delicacy.durian.state.v1.pay.impl;
 
-import com.delicacy.durian.state.pay.Pay;
-import com.delicacy.durian.state.pay.Strategy;
+import com.delicacy.durian.state.v1.pay.Pay;
+import com.delicacy.durian.state.v1.pay.Strategy;
 
 import java.math.BigDecimal;
 

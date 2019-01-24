@@ -1,4 +1,4 @@
-package com.delicacy.durian.state.pay;
+package com.delicacy.durian.state.v1.pay;
 
 
 import java.lang.annotation.ElementType;

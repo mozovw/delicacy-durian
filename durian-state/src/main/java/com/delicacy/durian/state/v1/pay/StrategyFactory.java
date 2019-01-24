@@ -1,4 +1,4 @@
-package com.delicacy.durian.state.pay;
+package com.delicacy.durian.state.v1.pay;
 
 import org.reflections.Reflections;
 
@@ -17,7 +17,7 @@ public class StrategyFactory {
 
 
     static {
-        Reflections reflections = new Reflections("com.delicacy.durian.state.pay.impl");
+        Reflections reflections = new Reflections("com.delicacy.durian.state.v1.pay.impl");
         Set<Class<?>> typesAnnotatedWith = reflections.getTypesAnnotatedWith(Pay.class);
         typesAnnotatedWith.stream().forEach(e->{
             Pay annotation = e.getAnnotation(Pay.class);

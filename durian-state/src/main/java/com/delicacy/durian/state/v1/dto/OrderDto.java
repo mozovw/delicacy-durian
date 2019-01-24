@@ -1,4 +1,4 @@
-package com.delicacy.durian.state.dto;
+package com.delicacy.durian.state.v1.dto;
 
 import lombok.Data;
 
@@ -7,11 +7,9 @@ import lombok.Data;
  * @create 2018-05-26 17:45
  **/
 @Data
-public class Order {
+public class OrderDto {
 
     private Integer payChannelId;
-
-    private String value = "100";
 
     private Integer goodsId;
 
