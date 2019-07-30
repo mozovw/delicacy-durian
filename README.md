@@ -5,3 +5,4 @@
 - 腾讯邮箱
 - 缓存
 - idworker用于分布式id，原理雪花算法
+- java validation 重写和优化几个注解
