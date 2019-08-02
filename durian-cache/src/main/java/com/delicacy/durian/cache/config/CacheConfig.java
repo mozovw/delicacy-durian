@@ -57,7 +57,6 @@ public class CacheConfig {
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
         redisCacheConfiguration = redisCacheConfiguration.serializeValuesWith(
                 RedisSerializationContext
@@ -75,7 +74,7 @@ public class CacheConfig {
             sb.append(target.getClass().getName());
             sb.append("." + method.getName());
             if(params==null||params.length==0||params[0]==null){
-                return null;
+                return sb.toString();
             }
             String join = String.join("&", Arrays.stream(params).map(Object::toString).collect(Collectors.toList()));
             String format = String.format("%s{%s}", sb.toString(), join);

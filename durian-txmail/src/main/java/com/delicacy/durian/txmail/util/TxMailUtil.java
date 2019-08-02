@@ -22,7 +22,7 @@ import java.util.Map;
 @Slf4j
 public class TxMailUtil {
 
-    private static String key  = "com.tomato.boss.sso.util.TxMailUtil";
+    private static String key  = "com.tomato.boss.sso.exam.TxMailUtil";
 
     public static BaseResDto getBaseResDto(Map<String, String> map, String url) {
         ResponseEntity<BaseResDto> forEntity = RestClientUtil.getRestTemplate().getForEntity(url, BaseResDto.class, map);
