@@ -157,7 +157,7 @@ public class ExcelExportUtilTest {
         try {
             List<ExcelExportEntity> entity = new ArrayList<ExcelExportEntity>();
             for (int i = 0; i < 500; i++) {
-                entity.add(new ExcelExportEntity("姓名" + i, "name" + i));
+                entity.add(new ExcelExportEntity("姓名" + i, "username" + i));
             }
 
             List<Map<String, String>> list = new ArrayList<Map<String, String>>();
@@ -165,7 +165,7 @@ public class ExcelExportUtilTest {
             for (int i = 0; i < 10; i++) {
                 map = new HashMap<String, String>();
                 for (int j = 0; j < 500; j++) {
-                    map.put("name" + j, j + "_" + i);
+                    map.put("username" + j, j + "_" + i);
                 }
                 list.add(map);
             }
