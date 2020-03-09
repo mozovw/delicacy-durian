@@ -3,6 +3,7 @@ package com.delicacy.durian.oauth.constants;
 public interface SecurityConstants {
     String PREFIX = "oauth:";
     String CLIENT_DETAILS_KEY = PREFIX + "client:details";
+    String USER_DETAILS_KEY = PREFIX + "user:details";
 
     /**
      * 角色前缀

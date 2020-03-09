@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @Data
 public class DefaultUser extends User implements Serializable{
-	private static final long serialVersionUID = -4354729570216312947L;
+	private static final long serialVersionUID = -5270153498899744860L;
 	/**
 	 * 用户ID
 	 */

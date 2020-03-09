@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.delicacy</groupId>
-	<artifactId>durian-oath2</artifactId>
+	<artifactId>durian-oauth2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>grape-oath2</name>
+	<name>grape-oauth2</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

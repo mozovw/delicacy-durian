@@ -11,17 +11,14 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    private static final String RESOURCE_ID = "oauth-resource";
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.resourceId(RESOURCE_ID).stateless(true);
+        resources.stateless(true);
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.exceptionHandling().accessDeniedHandler(new DefaultOAuth2AccessDeniedHandler());
-
         http.requestMatchers().antMatchers("/user/**")
                 .and()
                 .authorizeRequests()

@@ -27,11 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().permitAll();
         http.logout().permitAll();
         http.csrf().disable();
-
-        http.antMatcher("/**");
         http.authorizeRequests()
-                .antMatchers( "/login","/error").permitAll()
-                .antMatchers("/oauth/**").authenticated();
+                .antMatchers( "/login").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Override
@@ -39,17 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("123456"))
-                .roles("USER");
-    }
-
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

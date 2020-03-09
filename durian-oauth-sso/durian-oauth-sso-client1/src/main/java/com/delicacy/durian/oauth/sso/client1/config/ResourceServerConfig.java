@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    private static final String RESOURCE_ID = "oauth-resource";
+    private static final String RESOURCE_ID = "oauth-resource-1";
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {

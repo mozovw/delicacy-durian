@@ -2,6 +2,7 @@
 package com.delicacy.durian.oauth.config.oauth;
 
 
+import com.delicacy.durian.oauth.constants.SecurityConstants;
 import com.delicacy.durian.oauth.entity.SysUser;
 import com.delicacy.durian.oauth.entity.UserInfo;
 import com.delicacy.durian.oauth.service.SysUserService;
@@ -10,11 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Arrays;
@@ -24,6 +27,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Service
 public class DefaultUserDetailsService implements UserDetailsService {
     @Autowired
     private SysUserService userService;
@@ -38,14 +42,15 @@ public class DefaultUserDetailsService implements UserDetailsService {
      */
     @Override
     @SneakyThrows
+    @Cacheable(value = SecurityConstants.USER_DETAILS_KEY, key = "#username", unless = "#result == null")
     public UserDetails loadUserByUsername(String username) {
-        Cache cache = cacheManager.getCache("user_details");
-        if (cache != null && cache.get(username) != null) {
-            return (DefaultUser) cache.get(username).get();
-        }
+//        Cache cache = cacheManager.getCache("user_details");
+//        if (cache != null && cache.get(username) != null) {
+//            return (DefaultUser) cache.get(username).get();
+//        }
         UserInfo result = userService.userInfoByUsername(username);
         UserDetails userDetails = getUserDetails(result);
-        cache.put(username, userDetails);
+//        cache.put(username, userDetails);
         return userDetails;
     }
 

@@ -1,6 +1,7 @@
 package com.delicacy.durian.oauth.config.oauth;
 
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     @Bean
@@ -33,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @SneakyThrows
     public void configure(AuthenticationManagerBuilder auth) {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
 
 
@@ -44,18 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().permitAll();
         http.logout().permitAll().deleteCookies("JSESSIONID");
         http.csrf().disable();
-
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/oauth/**").authenticated();
+                .anyRequest().authenticated();
     }
 
-
-    @Override
-    @Bean
-    @SneakyThrows
-    public UserDetailsService userDetailsService() {
-        return new DefaultUserDetailsService();
-    }
 
 }
