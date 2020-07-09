@@ -2,8 +2,8 @@ package com.delicacy.durian.oauth.sso.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,14 +13,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-//@Configuration
-//@EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+@Configuration
+@EnableAuthorizationServer
+@Import(JwtTokenConfig.class)
+public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private static final String RESOURCE_ID = "oauth-resource-2";
+    private static final String[] RESOURCE_ID = {"oauth-resource","oauth-resource-1","oauth-resource-2"};
     private static final String CLIENT_ID = "client_id_1";
     private static final String CLIENT_SECRET = new BCryptPasswordEncoder().encode("123456");
 
@@ -31,8 +32,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private UserDetailsService detailsService;
 
+    @Qualifier("jwtTokenStore")
+    @Autowired
+    private TokenStore tokenStore;
 
-    // http://localhost:8000/auth/oauth/authorize?response_type=code&client_id=client_id_1&redirect_uri=http://localhost:8001/code&scope=write
+    @Autowired
+    private DefaultTokenServices defaultTokenServices;
+
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //配置两个客户端,一个用于password认证一个用于client认证
@@ -55,20 +62,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.userDetailsService(detailsService)
-                .tokenStore(memoryTokenStore())
+                .tokenStore(tokenStore)
+                .tokenServices(defaultTokenServices)
                 .authenticationManager(authenticationManager)
-                //接收GET和POST
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
-    }
-
-    /**
-     * token存储
-     *
-     * @return
-     */
-    @Bean
-    public TokenStore memoryTokenStore() {
-        return new InMemoryTokenStore();
     }
 
     @Override

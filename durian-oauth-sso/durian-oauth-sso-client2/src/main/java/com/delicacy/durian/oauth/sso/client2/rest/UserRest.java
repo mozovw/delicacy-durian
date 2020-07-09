@@ -15,4 +15,10 @@ public class UserRest {
         System.out.println("调用me接口获取用户信息：" + principal);
         return principal;
     }
+
+    @GetMapping(value = "getName")
+    public String getName() {
+        System.out.println("调用me接口获取用户信息：" + "xxx");
+        return "xxx";
+    }
 }
