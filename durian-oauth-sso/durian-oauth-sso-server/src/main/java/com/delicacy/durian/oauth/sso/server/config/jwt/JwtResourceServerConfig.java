@@ -1,4 +1,4 @@
-package com.delicacy.durian.oauth.sso.server.config;
+package com.delicacy.durian.oauth.sso.server.config.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableResourceServer
 @Import(JwtTokenConfig.class)
 public class JwtResourceServerConfig extends ResourceServerConfigurerAdapter {
-    private static final String RESOURCE_ID = "oauth-resource2";
+    private static final String RESOURCE_ID = "oauth-resource";
 
     @Qualifier("jwtTokenStore")
     @Autowired

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping(value = "code")
 public class CodeRest {
 
-    static String url = "http://localhost:8000/oauth/token?grant_type=authorization_code&client_id=client_id_1&client_secret=123456&redirect_uri=http://localhost:8001/code&code=";
+    static String url = "http://localhost:8000/oauth/token?grant_type=authorization_code&client_id=client_id_1&client_secret=123456&redirect_uri=http://localhost:8002/code&code=";
 
     @GetMapping
     public String get(@RequestParam("code") String code) {

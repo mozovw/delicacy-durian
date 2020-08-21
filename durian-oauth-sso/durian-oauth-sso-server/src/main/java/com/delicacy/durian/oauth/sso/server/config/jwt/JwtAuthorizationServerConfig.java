@@ -1,4 +1,4 @@
-package com.delicacy.durian.oauth.sso.server.config;
+package com.delicacy.durian.oauth.sso.server.config.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,7 +72,7 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
                 .tokenKeyAccess("permitAll()") //url:/oauth/token_key,exposes public key for token verification if using JWT tokens
-                .checkTokenAccess("isAuthenticated()") //url:/oauth/check_token allow check token
+                .checkTokenAccess("permitAll()") //url:/oauth/check_token allow check token
                 .allowFormAuthenticationForClients();
     }
 }

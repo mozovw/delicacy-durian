@@ -1,7 +1,8 @@
-package com.delicacy.durian.oauth.sso.server.config;
+package com.delicacy.durian.oauth.sso.client2.config.jwt;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -56,6 +57,7 @@ public class JwtTokenConfig {
     }
 
     @Bean
+    @Primary
     public DefaultTokenServices defaultTokenServices() {
         // 使用默认实现
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();

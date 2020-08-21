@@ -1,4 +1,4 @@
-package com.delicacy.durian.oauth.sso.client2.config;
+package com.delicacy.durian.oauth.sso.client2.config.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
