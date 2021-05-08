@@ -29,8 +29,8 @@ public class RestClientAutoConfiguration {
 	 */
 	@Bean
     public RestClientBootstrap restClientBootstrap(){
-        //HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
-		SimpleClientHttpRequestFactory httpRequestFactory = new SimpleClientHttpRequestFactory();
+        HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
+//		SimpleClientHttpRequestFactory httpRequestFactory = new SimpleClientHttpRequestFactory();
         httpRequestFactory.setConnectTimeout(connectTimeout);
         httpRequestFactory.setReadTimeout(readTimeout);
         RestTemplate restTemplate = new RestTemplate(httpRequestFactory);

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +33,8 @@ public class DurianRedissonApplication {
 
     @GetMapping("sendMessage")
     public String sendMessage(String message, @RequestParam(required = false) Integer timeout) {
-//		return doRedissonLock(message);
-        return doUtilTryLock(message);
+        return doRedissonLock(message);
+//        return doUtilTryLock(message);
 //		return doUtilLock(message);
     }
 
@@ -104,9 +106,9 @@ public class DurianRedissonApplication {
 
     private String doRedissonLock(String message) {
         RLock redLock = redissonClient.getLock("REDLOCK_KEY");
+        // leaseTime 当前线程释放锁时间，超过并发进入
+        redLock.lock(3, TimeUnit.SECONDS);
         try {
-            // leaseTime 当前线程释放锁时间，超过并发进入
-            redLock.lock(2, TimeUnit.SECONDS);
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
             countdown(5);
@@ -114,13 +116,15 @@ public class DurianRedissonApplication {
             double totalTimeSeconds = stopWatch.getTotalTimeSeconds();
             log.info(Thread.currentThread().getName() + "----" + totalTimeSeconds);
             return "Acquiring lock successful is " + message;
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (redLock.isLocked())
-                if (redLock.isHeldByCurrentThread())
+            if (redLock.isLocked()){
+                if (redLock.isHeldByCurrentThread()) {
+                    log.info(Thread.currentThread().getName() + "----释放锁");
                     redLock.unlock();
+                }
+            }
         }
         return "No acquiring lock is " + message;
     }

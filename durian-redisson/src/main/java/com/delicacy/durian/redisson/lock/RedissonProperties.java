@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "redisson")
-@ConditionalOnProperty("redisson.password")
+//@ConditionalOnProperty("redisson.password")
 public class RedissonProperties {
 
 	private int timeout = 3000;

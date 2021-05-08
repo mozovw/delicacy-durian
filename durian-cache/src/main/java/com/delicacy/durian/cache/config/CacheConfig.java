@@ -41,7 +41,6 @@ public class CacheConfig {
         );
         CompositeCacheManager compositeCacheManager = new CompositeCacheManager(/*concurrentMapCacheManager,*/ redisCacheManager);
         return compositeCacheManager;
-
     }
 
     private Map<String, RedisCacheConfiguration> getRedisCacheConfigurationMap() {
@@ -67,18 +66,18 @@ public class CacheConfig {
         return redisCacheConfiguration;
     }
 
-    @Bean
-    public KeyGenerator wiselyKeyGenerator() {
-        return (target, method, params) -> {
-            StringBuilder sb = new StringBuilder();
-            sb.append(target.getClass().getName());
-            sb.append("." + method.getName());
-            if(params==null||params.length==0||params[0]==null){
-                return sb.toString();
-            }
-            String join = String.join("&", Arrays.stream(params).map(Object::toString).collect(Collectors.toList()));
-            String format = String.format("%s{%s}", sb.toString(), join);
-            return format;
-        };
-    }
+        @Bean
+        public KeyGenerator wiselyKeyGenerator() {
+            return (target, method, params) -> {
+                StringBuilder sb = new StringBuilder();
+                sb.append(target.getClass().getName());
+                sb.append("." + method.getName());
+                if(params==null||params.length==0||params[0]==null){
+                    return sb.toString();
+                }
+                String join = String.join("&", Arrays.stream(params).map(Object::toString).collect(Collectors.toList()));
+                String format = String.format("%s{%s}", sb.toString(), join);
+                return format;
+            };
+        }
 }

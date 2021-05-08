@@ -29,7 +29,7 @@ public class Jsr303Util {
 		if (null != validResult && validResult.size() > 0) {
 			StringBuilder sb = new StringBuilder();
 			for (Iterator<ConstraintViolation<Object>> iterator = validResult.iterator(); iterator.hasNext();) {
-				ConstraintViolation<Object> constraintViolation = (ConstraintViolation<Object>) iterator.next();
+				ConstraintViolation<Object> constraintViolation = iterator.next();
 				String string = constraintViolation.getPropertyPath().toString();
 				String message = constraintViolation.getMessage();
 				if(isNotBlank(message) &&

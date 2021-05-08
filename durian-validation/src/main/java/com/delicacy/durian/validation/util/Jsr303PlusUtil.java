@@ -54,7 +54,7 @@ public class Jsr303PlusUtil {
         return null!=string && !"".equals(string);
     }
 
-    /*public static  <T> List<ImportResponse> checkList2List(List<T> t){
+    /*public static  <User> List<ImportResponse> checkList2List(List<User> t){
         List<ImportResponse> list = new ArrayList<>();
         if(CollectionUtils.isEmpty(t)){
             ImportResponse builder = new ImportResponse();
